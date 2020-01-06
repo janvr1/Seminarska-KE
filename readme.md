@@ -95,9 +95,9 @@ Iz slike lahko razberemo, da je bilo preneseno zaporedje bitov 01000001, kar v z
 <img src="i2c/i2c_povezave.pdf.png"/>
 </p>
 
-Vmesnik I2C je tako kot SPI sinhroni, razlikuje pa se v tem, da omogoča komunikacijo med večimi "master" in večimi "slave" napravami preko le dveh povezav – SDA (podatki) in SCL (ura). Komunikacija je paketno komutirana, kar pomeni, da mora imeti vsaka naprava svoj naslov. Število mogočih naslovov predstavlja zgornjo mejo števila naprav, ki jih lahko povežemo med seboj. To je ponavadi 119 za 7 bitni naslovni prostor (8 naslovov je rezerviranih). V primeru, da je potrebnih več naprav se lahko uporabi tudi 10 bitni naslovni prostor.
+Vmesnik I<sup>2</sup>C je tako kot SPI sinhroni, razlikuje pa se v tem, da omogoča komunikacijo med večimi "master" in večimi "slave" napravami preko le dveh povezav – SDA (podatki) in SCL (ura). Komunikacija je paketno komutirana, kar pomeni, da mora imeti vsaka naprava svoj naslov. Število mogočih naslovov predstavlja zgornjo mejo števila naprav, ki jih lahko povežemo med seboj. To je ponavadi 119 za 7 bitni naslovni prostor (8 naslovov je rezerviranih). V primeru, da je potrebnih več naprav se lahko uporabi tudi 10 bitni naslovni prostor.
 
-Kot prej si poglejmo podatkovni okvir I2C na realnem primeru prenosa črke "A". Prenos je bil opravljen pri frekvenci ure 100 kHz, v smeri od "master" naprave proti "slave" napravi z naslovom 0x44.
+Kot prej si poglejmo podatkovni okvir I<sup>2</sup>C na realnem primeru prenosa črke "A". Prenos je bil opravljen pri frekvenci ure 100 kHz, v smeri od "master" naprave proti "slave" napravi z naslovom 0x44.
 
 <p align="center">
 <img src="i2c/i2c_scope.png"/>
@@ -122,7 +122,7 @@ Pri času **t = 85,4 µs** sledi bit ACK. Ta bit ne prihaja s strani naprave "ma
 Pri času **t = 95,8 µs** se začne prenos podatkovnih bitov. Eden za drugim se v zaporedju MSB first prenese vseh 8 bitov poslane črke "A". Spremembe SDA signala so dovoljene le ko je ura v nizkem stanju, vzorčenje pa se zgodi ob pozitivni fronti urinega signala (prehod iz nizkega v visoko stanje). Medtem ko je ura v visokem stanju mora se signal SDA ne sme spreminjati, v nasprotnem primeru to pomeni neuspešen prenos. Če se to uresniči bo "slave"  po koncu podatkovnih bitov na SDA poslal logično 0 in s tem sporočil "masterju", da je bil prenos uspešen.
 
 Pri času **t = 198 µs** se signal SDA spremeni iz nizkega v visoko stanje ob visokem stanju urinega signala. Ta prehod se imenuje "stop conditon" in pomeni konec prenosa in vrnitev SDA in SCL signalov v privzeto visoko napetostno stanje.
-Ena izmed značilnosti vmesnika I2C je t.i. raztegovanje ure oz. "clock stretching". Po končanem prenosu osmih bitov in ACK znaka (188,7 us) bi lahko "slave" naprava držala signal SCL na nizki napetosti in s tem onemogočila napravi "master", da bi izvedla "stop condition". S tem "slave" sporoča, da potrebuje nekoliko več časa preden bo pripravljen na nov prenos podatkov.
+Ena izmed značilnosti vmesnika I<sup>2</sup>C je t.i. raztegovanje ure oz. "clock stretching". Po končanem prenosu osmih bitov in ACK znaka (188,7 us) bi lahko "slave" naprava držala signal SCL na nizki napetosti in s tem onemogočila napravi "master", da bi izvedla "stop condition". S tem "slave" sporoča, da potrebuje nekoliko več časa preden bo pripravljen na nov prenos podatkov.
 
 ## Gradiva
 CSV datoteke zajetih signalov in pripadajočo python kodo lahko prenesete [tukaj](https://github.com/janvr1/Seminarska-KE/tree/master/janvr_kom_vmesniki) ali pa [tukaj (zip datoteka)](https://github.com/janvr1/Seminarska-KE/blob/master/janvr_kom_vmesniki.zip).
