@@ -1,4 +1,4 @@
-# Komunikacijski protokolu v mikrokrmilnikih
+# Komunikacijski protokoli v mikrokrmilnikih
 
 ## Pregled vmesnikov
 
@@ -114,4 +114,4 @@ Pri času **t = 198 µs** se signal SDA spremeni iz nizkega v visoko stanje ob v
 Ena izmed značilnosti vmesnika I2C je t.i. raztegovanje ure oz. »clock stretching«. Po končanem prenosu osmih bitov in ACK znaka (188,7 us) bi lahko »slave« naprava držala signal SCL na nizki napetosti in s tem onemogočila napravi »master«, da bi izvedla »stop condition«. S tem »slave« sporoča, da potrebuje nekoliko več časa preden bo pripravljen na nov prenos podatkov.
 
 ## Gradiva
-CSV datoteke zajetih signalov in pripadajočo python kodo lahko prenesete tukaj.
+CSV datoteke zajetih signalov in pripadajočo python kodo lahko prenesete [tukaj](https://github.com/janvr1/Seminarska-KE/tree/master/janvr_kom_vmesniki).
