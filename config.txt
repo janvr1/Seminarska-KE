@@ -1,0 +1,8 @@
+I2C:
+    100 kHz, addr=0x44
+SPI:
+    100 kHz, SPIMODE0, MSBFIRST
+UART:
+    9600 baud, SERIAL_8E1/8O1
+
+Data: 0x41 = 0b01000001 = 'A'
