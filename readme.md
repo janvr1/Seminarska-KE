@@ -19,6 +19,7 @@ Za komunikacijo med mikrokrmilnikom in drugimi napravami, ki so priključene nan
 <p align="center">
 <img src="uart/uart_povezave(1).pdf.png"/>
 </p>
+
 Vmesnik UART za delovanje potrebuje 2 povezavi – to sta TX (oddaja) in RX (sprejem), ki jih med napravama povežemo križno. Na vsaki strani vmesnika se lahko nahaja največ ena naprava. Beseda asinhroni v kratici UART se nanaša na to, da se signal ure ne prenaša po posebnem vodniku, temveč ga vsaka naprava generira sama, kar pomeni, da mora biti takt ure na obeh straneh prednastavljen na pravo vrednost. V nasprotnem primeru komunikacija ni mogoča. Poleg hitrosti je potrebno nastaviti tudi način delovanja, ki ga ponavadi označimo v notaciji D/P/S (data/parity/stop) in nam pove število podatkovnih bitov (ponavadi 5-9), tip paritete (O – liha (odd), E – soda (even) ali N – brez paritete) in število stop bitov (1-2), ki jih bomo uporabili v posameznem podatkovnem okvirju.
 
 Poglejmo si podatkovni okvir na realnem primeru prenosa črke "A" v načinu 8/O/1 in 8/E/1 (8 podatkovnih bitov, liha/soda pariteta in 1 stop bit) in hitrosti 9600 baud (perioda 104 µs).
@@ -48,6 +49,7 @@ Pri času **t = 1040 µs** se začne STOP bit (vedno logična 1) ta sprejemniku 
 
 
 ## SPI – Serial Peripheral Interface
+
 <p align="center">
 <img src="spi/spi_povezave.pdf.png"/>
 </p>
