@@ -32,7 +32,7 @@ Poglejmo si podatkovni okvir na realnem primeru prenosa črke "A" v načinu 8/O/
 Na zgornjih slikah lahko vidimo posnetek zaslona iz osciloskopa, ki prikazuje prenos črke A pri obeh načinih paritete. Isti signal je bil shranjen tudi v csv datoteki in ponovno izrisan na računalniku za lažji grafični prikaz.
 
 <p align="center">
-<img src="uart/uart.svg.png"/>
+<img src="uart/uart.svg"/>
 </p>
 
 Na začetku slike (čas **t < 0 µs**) lahko opazimo, da je privzeto stanje prenosne linije je visoka napetost (v mikrokrmilnikih ponavadi 3,3 V ali 5 V), kar izhaja iz časov telegrafije in služi temu, da v času čakanja oddajnik izkazuje svojo "živost" z oddajanjem visoke napetosti. V nasprotnem primeru namreč  ne bi bilo mogoče ločiti med okvarjenim ali čakajočim oddajnikom.
@@ -79,7 +79,7 @@ Kot prej si poglejmo podatkovni okvir SPI na realnem primeru prenosa črke "A". 
 Na zgornji sliki lahko vidimo posnetek zaslona iz osciloskopa, ki prikazuje prenos črke A pri danih parametrih prenosa. Isti signal je bil shranjen tudi v csv datoteki in ponovno izrisan na računalniku za lažji grafični prikaz
 
 <p align="center">
-<img src="spi/spi.svg.png"/>
+<img src="spi/spi.svg"/>
 </p>
 
 Pri času **t < 0 µs** lahko opazimo, da je privzeto stanje signala ure (SCLK) nizka napetost, kar pomeni polariteto ure CPOL=0, kar je pravilno saj uporabljamo SPI v načinu 0 (CPOL=0, CPHA=0).
@@ -108,7 +108,7 @@ Kot prej si poglejmo podatkovni okvir I<sup>2</sup>C na realnem primeru prenosa 
 Na zgornji sliki lahko vidimo posnetek zaslona iz osciloskopa, ki prikazuje prenos črke A pri danih parametrih prenosa. Isti signal je bil shranjen tudi v csv datoteki in ponovno izrisan na računalniku za lažji grafični prikaz
 
 <p align="center">
-<img src="i2c/i2c.svg.png"/>
+<img src="i2c/i2c.svg"/>
 </p>
 
 Pri času **t < 0 µs** lahko opazimo, da je privzeto stanje SDA in SCL vodnikov visoka napetost oz. logična 1.
