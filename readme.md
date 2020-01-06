@@ -115,7 +115,7 @@ Pri času **t = 0 µs** se podatkovna linija SDA spremeni iz visokega v nizko st
 
 Od časa **t = 2,8 µs** se prenese 7 bitni naslov "slave" naprave kateri je trenutni paket namenjen. Zaporedje prenosa bitov je MSB first, torej lahko iz slike razberemo da je paket namenjen napravi z naslovom 1000100, kar je v desetiškem 68 oz. šestnajstiškem sistemu 44.
 
-Pri času **t = 75,1 µs** se začne R/W bit, ki označuje smer prenosa. V tem primeru ima vrednost 0, kar pomeni komunikacijo "master" -> "slave". Vrednost 1 pa bi pomenila "slave" -> "master"
+Pri času **t = 75,1 µs** se začne R/W bit, ki označuje smer prenosa. V tem primeru ima vrednost 0, kar pomeni komunikacijo od "master" proti "slave". Vrednost 1 pa bi pomenila od "slave" proti "master"
 
 Pri času **t = 85,4 µs** sledi bit ACK. Ta bit ne prihaja s strani naprave "master" temveč se v tem trenutki nadzor nad SDA preda napravi "slave". Z vrednostjo 0 "slave" sporoča, da je uspešno prejel sporočilo. Zaradi zakasnitev pri predaji nadzora nad SDA lahko takoj po končanem ACK bitu opazimo krajšo motnjo, ki pa ni kritična in ne vpliva na prenosa podatkov.
 
