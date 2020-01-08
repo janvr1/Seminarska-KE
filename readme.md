@@ -17,7 +17,7 @@ Za komunikacijo med mikrokrmilnikom in drugimi napravami, ki so priključene nan
 ## UART - Universal Asynchronous Receiver-Transmitter
 
 <p align="center">
-<img src="uart/uart_povezave(1).pdf.png"/>
+<img src="uart/uart_povezave(1).svg"/>
 </p>
 
 Vmesnik UART za delovanje potrebuje 2 povezavi – to sta TX (oddaja) in RX (sprejem), ki jih med napravama povežemo križno. Na vsaki strani vmesnika se lahko nahaja največ ena naprava. Beseda asinhroni v kratici UART se nanaša na to, da se signal ure ne prenaša po posebnem vodniku, temveč ga vsaka naprava generira sama, kar pomeni, da mora biti takt ure na obeh straneh prednastavljen na pravo vrednost. V nasprotnem primeru komunikacija ni mogoča. Poleg hitrosti je potrebno nastaviti tudi način delovanja, ki ga ponavadi označimo v notaciji D/P/S (data/parity/stop) in nam pove število podatkovnih bitov (ponavadi 5-9), tip paritete (O – liha (odd), E – soda (even) ali N – brez paritete) in število stop bitov (1-2), ki jih bomo uporabili v posameznem podatkovnem okvirju.
@@ -51,7 +51,7 @@ Pri času **t = 1040 µs** se začne STOP bit (vedno logična 1) ta sprejemniku 
 ## SPI – Serial Peripheral Interface
 
 <p align="center">
-<img src="spi/spi_povezave.pdf.png"/>
+<img src="spi/spi_povezave.svg"/>
 </p>
 
 Vmesnik SPI omogoča komunikacijo med eno “master” napravo in poljubnim številom “slave” naprav. Potrebni so 3 vodniki SCLK (ura), MOSI (Master Out Slave In), MISO (Master In Slave Out) in pa še en dodaten CS (Chip Select) vodnik za vsako “slave” napravo. Vodniku CS se lahko reče tudi SS (Slave Select) in se uporablja za izbiro "slave" naprave, ki bo trenutno aktivna. V nasprotuju z UART je vmesnik SPI sinhron, kar pomeni, da ima en vodnik namenjen prenosu ure, zato predhodna nastavitev le-te na obeh straneh ni potrebna, je pa vseeno potrebno nastaviti nekatere druge parametre prenosa in sicer polariteto ure (CPOL), fazo ure (CPHA) in zaporedje bitov (MSB/LSB).
@@ -94,7 +94,7 @@ Iz slike lahko razberemo, da je bilo preneseno zaporedje bitov 01000001, kar v z
 ## I<sup>2</sup>C (IIC) - Inter Integrated Circuit
 
 <p align="center">
-<img src="i2c/i2c_povezave.pdf.png"/>
+<img src="i2c/i2c_povezave.svg"/>
 </p>
 
 Vmesnik I<sup>2</sup>C je tako kot SPI sinhroni, razlikuje pa se v tem, da omogoča komunikacijo med večimi "master" in večimi "slave" napravami preko le dveh povezav – SDA (podatki) in SCL (ura). Komunikacija je paketno komutirana, kar pomeni, da mora imeti vsaka naprava svoj naslov. Število mogočih naslovov predstavlja zgornjo mejo števila naprav, ki jih lahko povežemo med seboj. To je ponavadi 119 za 7 bitni naslovni prostor (8 naslovov je rezerviranih). V primeru, da je potrebnih več naprav se lahko uporabi tudi 10 bitni naslovni prostor.
