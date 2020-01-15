@@ -1,4 +1,4 @@
-# Komunikacijski protokoli v mikrokrmilnikih
+# Komunikacijski vmesniki v mikrokrmilnikih
 
 ## Pregled vmesnikov
 
