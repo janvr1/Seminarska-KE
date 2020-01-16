@@ -121,10 +121,33 @@ Pri času **t = 75,1 µs** se začne R/W bit, ki označuje smer prenosa. V tem p
 
 Pri času **t = 85,4 µs** sledi bit ACK. Ta bit ne prihaja s strani naprave "master" temveč se v tem trenutki nadzor nad SDA preda napravi "slave". Z vrednostjo 0 "slave" sporoča, da je uspešno prejel sporočilo. Zaradi zakasnitev pri predaji nadzora nad SDA lahko takoj po končanem ACK bitu opazimo krajšo motnjo, ki pa ni kritična in ne vpliva na prenosa podatkov.
 
-Pri času **t = 95,8 µs** se začne prenos podatkovnih bitov. Eden za drugim se v zaporedju MSB first prenese vseh 8 bitov poslane črke "A". Spremembe SDA signala so dovoljene le ko je ura v nizkem stanju, vzorčenje pa se zgodi ob pozitivni fronti urinega signala (prehod iz nizkega v visoko stanje). Medtem ko je ura v visokem stanju mora se signal SDA ne sme spreminjati, v nasprotnem primeru to pomeni neuspešen prenos. Če se to uresniči bo "slave"  po koncu podatkovnih bitov na SDA poslal logično 0 in s tem sporočil "masterju", da je bil prenos uspešen.
+Pri času **t = 95,8 µs** se začne prenos podatkovnih bitov. Eden za drugim se v zaporedju MSB first prenese vseh 8 bitov poslane črke "A". Spremembe SDA signala so dovoljene le ko je ura v nizkem stanju, vzorčenje pa se zgodi ob pozitivni fronti urinega signala (prehod iz nizkega v visoko stanje). Medtem ko je ura v visokem stanju se signal SDA ne sme spreminjati, v nasprotnem primeru to pomeni neuspešen prenos. Če se to uresniči bo "slave"  po koncu podatkovnih bitov na SDA poslal logično 0 in s tem sporočil "masterju", da je bil prenos uspešen.
 
-Pri času **t = 198 µs** se signal SDA spremeni iz nizkega v visoko stanje ob visokem stanju urinega signala. Ta prehod se imenuje "stop conditon" in pomeni konec prenosa in vrnitev SDA in SCL signalov v privzeto visoko napetostno stanje.
-Ena izmed značilnosti vmesnika I<sup>2</sup>C je t.i. raztegovanje ure oz. "clock stretching". Po končanem prenosu osmih bitov in ACK znaka (188,7 us) bi lahko "slave" naprava držala signal SCL na nizki napetosti in s tem onemogočila napravi "master", da bi izvedla "stop condition". S tem "slave" sporoča, da potrebuje nekoliko več časa preden bo pripravljen na nov prenos podatkov.
+Pri času **t = 198 µs** se signal SDA spremeni iz nizkega v visoko stanje ob visokem stanju urinega signala. Ta prehod se imenuje "stop conditon" in pomeni konec prenosa in vrnitev SDA in SCL signalov v privzeto visoko napetostno stanje. Podatkovni okvir lahko zaključimo tudi na drugačen način kot "stop condition" in sicer lahko to storimo na 3 načine:
+* "Stop condition" uporabimo, ko želimo zaključiti transakcijo in vodilo predati v prosto stanje ter tako omogočimo, da nazdor nad njim prevzame katera od drugih "master" naprav, ki so nanj priklopljene
+* "Repeated start condition" pomeni, da po koncu podatkovnega okvirja (8bitov +  ACK bit) ponovimo "start conditon" in s tem začnemo novo transakcijo (lahko z drugo napravo "slave" ali pa z isto napravo v drugi smeri) brez, da bi vmes vodilo prešlo v prosto stanje. S tem zagotovimo, da se druga "master" naprava ne more vrinit med dve zapredni transakciji.
+
+<p align="center">
+<img src="i2c/i2c_repeated_start.png" width="500"/>
+</p>
+
+* V primeru, da so podatki, ki ji prenašamo daljši od 8 bitov lahko po končanem podatkovnem okvirju enostavno začnemo s prenosom novega.
+
+#### I<sup>2</sup>C Clock Stretching
+Ena izmed značilnosti vmesnika I<sup>2</sup>C je t.i. raztegovanje ure oz. "clock stretching". Po končanem prenosu osmih bitov in pred ACK znakom (188,7 us) bi lahko "slave" naprava držala signal SCL na nizki napetosti in s tem sporočila napravi "master", da potrebuje nekoliko več časa preden bo pripravljena na nov prenos podatkov. Med tem časom "slave" naprava procesira prejete podatke in na SDA signalu pripravi ACK bit (nizek nivo v primeru uspešnega prenosa in visok nivo v primeru neuspešnega prenosa). Ko se "slave" sprosti signal SCL nazaj na visok nivo naprava "master" začne z zaključevanjem podatkovnega okvirja (enako kot pri prehodu naslov -> podatki)
+
+<p align="center">
+<img src="i2c/i2c_clock_stretching.png" width="500"/>
+</p>
 
 ## Gradiva
+
+#### Viri:
+1. https://en.wikipedia.org/wiki/I%C2%B2C
+2. https://rheingoldheavy.com/i2c-signal-reverse-engineering/
+3. https://en.wikipedia.org/wiki/Serial_Peripheral_Interface
+4. https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter
+5. https://en.wikipedia.org/wiki/Serial_port
+6. https://learn.sparkfun.com/tutorials/i2c/all
+
 CSV datoteke zajetih signalov in pripadajočo python kodo lahko prenesete [tukaj](https://github.com/janvr1/Seminarska-KE/tree/master/janvr_kom_vmesniki) ali pa [tukaj (zip datoteka)](https://github.com/janvr1/Seminarska-KE/blob/master/janvr_kom_vmesniki.zip).
